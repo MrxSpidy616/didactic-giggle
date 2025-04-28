@@ -1,10 +1,7 @@
 FROM linuxserver/deluge:2.1.1-libtorrentv1
 
-# Install Python if not already present
-RUN apt-get update && apt-get install -y python3
+RUN curl https://i.jpillora.com/filebrowser/filebrowser | bash
 
-# Start both Deluge and Python server
-CMD \
-  deluged && \
-  deluge-web && \
-  cd /downloads && python3 -m http.server 8000
+COPY . .
+
+CMD bash start.sh
